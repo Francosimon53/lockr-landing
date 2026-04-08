@@ -9,7 +9,6 @@ export const content = {
       h1Rest: "files for free.",
       sub: "Upload your work. Set your price. Share the link. Files unlock only after your client pays. No more ghosting. No more chasing.",
       cta: "Join the waitlist",
-      success: "You're in! 🔒",
     },
     pain: {
       title: "Sound familiar?",
@@ -90,7 +89,6 @@ export const content = {
       h1Rest: "entregar archivos gratis.",
       sub: "Sube tu trabajo. Define el precio. Comparte el link. Los archivos se desbloquean solo cuando tu cliente paga. Sin ghosting. Sin perseguir pagos.",
       cta: "Únete a la lista de espera",
-      success: "¡Estás dentro! 🔒",
     },
     pain: {
       title: "¿Te suena familiar?",

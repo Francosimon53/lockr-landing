@@ -5,28 +5,11 @@ import { content, type Lang } from "./i18n";
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const t = content[lang];
 
   const toggleLang = () => setLang(lang === "en" ? "es" : "en");
-
-  // Google Form config — replace with your own values
-  const GOOGLE_FORM_ID = "YOUR_FORM_ID";
-  const GOOGLE_ENTRY_ID = "entry.YOUR_ENTRY_ID";
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    const url = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
-    const body = new URLSearchParams({ [GOOGLE_ENTRY_ID]: email });
-    // Fire-and-forget — Google Forms doesn't return CORS-friendly responses
-    fetch(url, { method: "POST", body, mode: "no-cors" });
-    setSubmitted(true);
-    setEmail("");
-  };
 
   return (
     <main className="relative z-10">
@@ -56,31 +39,12 @@ export default function Home() {
           {t.hero.sub}
         </p>
         <div className="animate-fade-up delay-400 mt-10">
-          {submitted ? (
-            <p className="font-mono text-accent text-xl font-bold">
-              {t.hero.success}
-            </p>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto"
-            >
-              <input
-                type="email"
-                required
-                placeholder="you@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-card border border-card-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent transition-colors"
-              />
-              <button
-                type="submit"
-                className="bg-accent text-background font-bold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
-              >
-                {t.hero.cta}
-              </button>
-            </form>
-          )}
+          <button
+            onClick={() => window.open("https://forms.gle/5jGqHXSXuBjtxTw1A", "_blank")}
+            className="bg-accent text-background font-bold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
+          >
+            {t.hero.cta}
+          </button>
         </div>
       </section>
 
