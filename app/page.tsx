@@ -13,14 +13,17 @@ export default function Home() {
 
   const toggleLang = () => setLang(lang === "en" ? "es" : "en");
 
+  // Google Form config — replace with your own values
+  const GOOGLE_FORM_ID = "YOUR_FORM_ID";
+  const GOOGLE_ENTRY_ID = "entry.YOUR_ENTRY_ID";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    await fetch("/api/waitlist", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+    const url = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+    const body = new URLSearchParams({ [GOOGLE_ENTRY_ID]: email });
+    // Fire-and-forget — Google Forms doesn't return CORS-friendly responses
+    fetch(url, { method: "POST", body, mode: "no-cors" });
     setSubmitted(true);
     setEmail("");
   };
